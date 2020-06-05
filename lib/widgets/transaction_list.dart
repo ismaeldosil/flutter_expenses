@@ -49,16 +49,31 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 300,
-      child: transactions.isNotEmpty
-          ? ListView.builder(
+    return transactions.isNotEmpty
+        ? Container(
+            height: 530,
+            child: ListView.builder(
               itemBuilder: (ctx, index) {
                 return _createRow(ctx, transactions[index]);
               },
               itemCount: transactions.length,
-            )
-          : Image.asset('assets/images/waiting.png'),
-    );
+            ))
+        : SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Text(
+                  'Theres no transactions yet!',
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Image.asset(
+                  'assets/images/waiting.png',
+                  fit: BoxFit.cover,
+                )
+              ],
+            ),
+          );
   }
 }
